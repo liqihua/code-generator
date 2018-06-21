@@ -1,9 +1,8 @@
-package com.java.entity;
+package ${packageName}.entity;
 
-import com.fasterxml.jackson.annotation.JsonFormat;
 import org.springframework.format.annotation.DateTimeFormat;
 
-import com.java.sys.common.basic.entity.BaseEntity;
+import com.core.common.basic.entity.BaseEntity;
 import java.util.Date;
 <#list table.columnList as col>
 <#if col.javaType == "BigDecimal">

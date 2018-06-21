@@ -1,12 +1,11 @@
-package com.java.dao;
+package ${packageName}.dao;
 
-import org.springframework.stereotype.Repository;
+import org.apache.ibatis.annotations.Mapper;
+import ${packageName}.entity.${table.className};
+import com.core.common.basic.dao.BaseDao;
 
-import com.java.entity.${table.className};
-import com.java.sys.common.basic.dao.BaseDao;
 
-
-@Repository
+@Mapper
 public interface ${table.className}Dao extends BaseDao<${table.className}>{
 	
 }

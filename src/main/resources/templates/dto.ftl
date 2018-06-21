@@ -1,7 +1,5 @@
-package com.java.entity.response;
+package ${packageName}.entity.dto;
 
-import com.fasterxml.jackson.annotation.JsonFormat;
-import org.springframework.format.annotation.DateTimeFormat;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import java.util.Date;
@@ -14,7 +12,7 @@ import java.math.BigDecimal;
 </#list>
 
 @ApiModel("${table.tableNameCH}")
-public class Return${table.shortName} implements Serializable{
+public class DTO${table.shortName} implements Serializable{
 
 	private static final long serialVersionUID = 1L;
 	
@@ -35,9 +33,7 @@ public class Return${table.shortName} implements Serializable{
 	<#list table.columnList as col>
 	<#if col.columnName != "create_date" && col.columnName != "update_date">
     
-    <#if col.javaType == "Date">
-	@JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss",timezone="GMT+8")
-	</#if>
+
     public ${col.javaType} ${col.getMethod}() {
     	return ${col.attrName};
     }

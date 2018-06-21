@@ -2,13 +2,13 @@ package com.generator.service;
 
 import com.generator.common.basic.Table;
 import com.generator.common.basic.TableColumn;
+import com.core.common.utils.Tool;
 import freemarker.template.Configuration;
 import freemarker.template.Template;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.env.Environment;
 import org.springframework.stereotype.Service;
 
-import javax.annotation.Resource;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.OutputStreamWriter;
@@ -26,7 +26,7 @@ public class GeneratorService {
 	protected static final int TYPE_WEB_CONTROLLER = 5;
 	protected static final int TYPE_JSP_LIST = 6;
 	protected static final int TYPE_JSP_FORM = 7;
-	protected static final int TYPE_RETURN = 8;
+	protected static final int TYPE_DTO = 8;
 	
 	protected static final String TPL_MAPPER = "/mapper.ftl";
 	protected static final String TPL_ENTITY = "/entity.ftl";
@@ -35,15 +35,15 @@ public class GeneratorService {
 	protected static final String TPL_WEB_CONTROLLER = "/webController.ftl";
 	protected static final String TPL_JSP_LIST = "/jspList.ftl";
 	protected static final String TPL_JSP_FORM = "/jspForm.ftl";
-	protected static final String TPL_RETURN= "/return.ftl";
+	protected static final String TPL_DTO = "/dto.ftl";
 	
-	protected static final String PATH_MAPPER ="\\src\\main\\java\\com\\java\\dao\\mappers";
-	protected static final String PATH_ENTITY ="\\src\\main\\java\\com\\java\\entity";
-	protected static final String PATH_DAO ="\\src\\main\\java\\com\\java\\dao";
-	protected static final String PATH_SERVICE ="\\src\\main\\java\\com\\java\\service";
-	protected static final String PATH_WEB_CONTROLLER ="\\src\\main\\java\\com\\java\\controller\\web";
+	protected static final String PATH_MAPPER ="\\dao\\mappers";
+	protected static final String PATH_ENTITY ="\\entity";
+	protected static final String PATH_DAO ="\\dao";
+	protected static final String PATH_SERVICE ="\\service";
+	protected static final String PATH_WEB_CONTROLLER ="\\controller\\web";
 	protected static final String PATH_JSP = "\\src\\main\\webapp\\WEB-INF\\views\\project";
-	protected static final String PATH_RETURN = "\\src\\main\\java\\com\\java\\entity\\response";
+	protected static final String PATH_DTO = "\\entity\\dto";
 	
 	protected static final String SUFFIX_MAPPER = "Dao.xml";
 	protected static final String SUFFIX_ENTITY = ".java";
@@ -67,75 +67,75 @@ public class GeneratorService {
 	/*
 	 * 全部生成
 	 */
-	public void makeAll(String tableName){
-		makeMapper(tableName);
-		makeEntity(tableName);
-		makeDao(tableName);
-		makeReturn(tableName);
-		makeService(tableName);
-		makeWebController(tableName);
-		makeJspList(tableName);
-		makeJspForm(tableName);
+	public void makeAll(String tableName,String packageName){
+		makeMapper(tableName,packageName);
+		makeEntity(tableName,packageName);
+		makeDao(tableName,packageName);
+		makeVO(tableName,packageName);
+		makeService(tableName,packageName);
+		makeWebController(tableName,packageName);
+		//makeJspList(tableName);
+		//makeJspForm(tableName);
 	}
 	
 	
 	/*
 	 * 生成mapper
 	 */
-	public void makeMapper(String tableName){
-		generate(tableName, TYPE_MAPPER);
+	public void makeMapper(String tableName,String packageName){
+		generate(tableName, TYPE_MAPPER,packageName);
 	}
 	
 	/*
 	 * 生成实体类
 	 */
-	public void makeEntity(String tableName){
-		generate(tableName, TYPE_ENTITY);
+	public void makeEntity(String tableName,String packageName){
+		generate(tableName, TYPE_ENTITY,packageName);
 	}
 	
 	/*
 	 * 生成dao
 	 */
-	public void makeDao(String tableName){
-		generate(tableName, TYPE_DAO);
+	public void makeDao(String tableName,String packageName){
+		generate(tableName, TYPE_DAO,packageName);
 	}
 	
 	/*
 	 * 生成return
 	 */
-	public void makeReturn(String tableName){
-		generate(tableName, TYPE_RETURN);
+	public void makeVO(String tableName, String packageName){
+		generate(tableName, TYPE_DTO,packageName);
 	}
 	
 	/*
 	 * 生成service
 	 */
-	public void makeService(String tableName){
-		generate(tableName, TYPE_SERVICE);
+	public void makeService(String tableName,String packageName){
+		generate(tableName, TYPE_SERVICE,packageName);
 	}
 	
 	/*
 	 * 生成controller
 	 */
-	public void makeWebController(String tableName){
-		generate(tableName, TYPE_WEB_CONTROLLER);
+	public void makeWebController(String tableName,String packageName){
+		generate(tableName, TYPE_WEB_CONTROLLER,packageName);
 	}
 	
 	/*
 	 * 生成list.jsp
 	 */
-	public void makeJspList(String tableName){
-		generate(tableName, TYPE_JSP_LIST);
+	public void makeJspList(String tableName,String packageName){
+		generate(tableName, TYPE_JSP_LIST,packageName);
 	}
 	
 	/*
 	 * 生成form.jsp
 	 */
-	public void makeJspForm(String tableName){
-		generate(tableName, TYPE_JSP_FORM);
+	public void makeJspForm(String tableName,String packageName){
+		generate(tableName, TYPE_JSP_FORM,packageName);
 	}
 	
-	public void generate(String tableName,int type){
+	public void generate(String tableName,int type,String packageName){
 		String tplFile = null;
 		String suffix = null;
 		String genPath = null;
@@ -176,12 +176,14 @@ public class GeneratorService {
 				genPath = PATH_JSP;
 				suffix = SUFFIX_JSP_FORM;
 				break;
-			case TYPE_RETURN:
-				tplFile = TPL_RETURN;
-				genPath = PATH_RETURN;
+			case TYPE_DTO:
+				tplFile = TPL_DTO;
+				genPath = PATH_DTO;
 				suffix = SUFFIX_RETURN;
 				break;
 		}
+
+        genPath = Tool.getCodeRoot() + packageName.replace(".","\\") + genPath;
 		
 		List<TableColumn> columnList = tableService.findColumnList(tableName);
 		if(columnList != null){
@@ -201,14 +203,15 @@ public class GeneratorService {
 			
 			Map<String,Object> table = new HashMap<String, Object>();
 			table.put("table", sysTable);
+			table.put("packageName", packageName);
 			Configuration cfg = new Configuration();
 	        String path = this.getClass().getResource("/").getPath()+"templates";
 	        String fileName = sysTable.getClassName()+suffix;
 	        if(type == TYPE_JSP_LIST || type == TYPE_JSP_FORM){
 	        	fileName = tableService.firstLower(fileName);
 	        }
-	        if(type == TYPE_RETURN){
-	        	fileName = "Return"+sysTable.getShortName()+suffix;
+	        if(type == TYPE_DTO){
+	        	fileName = "DTO"+sysTable.getShortName()+suffix;
 	        }
 			try{
 				cfg.setDirectoryForTemplateLoading(new File(path));
@@ -218,16 +221,17 @@ public class GeneratorService {
 				System.out.println("--------- freemarker making ---------");
 				System.out.println(out.toString());
 
-				String workplace = environment.getProperty("workplace");
-				File targetDir = new File(workplace+genPath);
+				File targetDir = new File(genPath);
+				targetDir.mkdirs();
 				File targetFile = new File(targetDir,fileName);
 				targetFile.createNewFile();
 				OutputStreamWriter osw = new OutputStreamWriter(new FileOutputStream(targetFile),"UTF-8");
 				osw.write(out.toString());
 				osw.close();
-			}catch(Exception e){
-				e.printStackTrace();
-			}
+			System.out.println("--- path:"+targetFile.getPath());
+		}catch(Exception e){
+			e.printStackTrace();
+		}
 		}
 	}
 	

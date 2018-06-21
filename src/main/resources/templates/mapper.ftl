@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
-<mapper namespace="com.java.dao.${table.className}Dao">
+<mapper namespace="${packageName}.dao.${table.className}Dao">
 
 	<sql id="tableColumns">
 	<#assign columnField>
@@ -16,7 +16,7 @@
 		`${table.tableName}` a 
 	</sql>
 	
-	<select id="get" resultType="${table.className}">
+	<select id="get" resultType="${packageName}.entity.${table.className}">
 		SELECT 
 			<include refid="tableColumns"/>
 		FROM 
@@ -25,7 +25,7 @@
 	</select>
 
 
-    <select id="getForUpdate" resultType="${table.className}">
+    <select id="getForUpdate" resultType="${packageName}.entity.${table.className}">
         SELECT
         <include refid="tableColumns"/>
         FROM
@@ -34,7 +34,7 @@
     </select>
 
 	
-	<select id="getBy" resultType="${table.className}">
+	<select id="getBy" resultType="${packageName}.entity.${table.className}">
 		SELECT 
 			<include refid="tableColumns"/>
 		FROM 
@@ -42,7 +42,7 @@
 		WHERE a.${"$"}{column} = ${"#"}{value}
 	</select>
 	
-	<select id="fromTable" resultType="${table.className}">
+	<select id="fromTable" resultType="${packageName}.entity.${table.className}">
 		SELECT 
 			<include refid="tableColumns"/>
 		FROM 
@@ -53,7 +53,7 @@
 		${"$"}{sql }
 	</select>
 	
-    <select id="findList" resultType="${table.className}">
+    <select id="findList" resultType="${packageName}.entity.${table.className}">
         SELECT 
 	        <include refid="tableColumns"/>
         FROM 

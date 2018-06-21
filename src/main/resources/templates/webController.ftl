@@ -1,4 +1,4 @@
-package com.java.controller.web;
+package ${packageName}.controller.web;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
@@ -13,11 +13,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-import com.java.sys.common.basic.controller.BaseController;
-import com.java.sys.common.page.SysPage;
-import com.java.sys.common.utils.Tool;
-import com.java.entity.${table.className};
-import com.java.service.${table.className}Service;
+import com.core.common.basic.controller.BaseController;
+import com.core.common.page.SysPage;
+import com.core.common.utils.Tool;
+import ${packageName}.entity.${table.className};
+import ${packageName}.service.${table.className}Service;
 
 @ApiIgnore
 @Controller
@@ -57,7 +57,6 @@ public class ${table.className}WebController extends BaseController{
 	@RequestMapping("/save")
 	public String save(${table.className} ${table.lowerName}, Model model, RedirectAttributes redirectAttributes) {
 		${table.lowerName}Service.save(${table.lowerName});
-		addMessage("保存成功", SUCCESS, redirectAttributes);
 		return "redirect:/sys/${table.lowerName}WebController/list";
 	}
 	
@@ -65,7 +64,6 @@ public class ${table.className}WebController extends BaseController{
 	@RequestMapping("/delete")
 	public String delete(${table.className} ${table.lowerName}, RedirectAttributes redirectAttributes) {
 		${table.lowerName}Service.delete(${table.lowerName});
-		addMessage("删除成功", SUCCESS, redirectAttributes);
 		return "redirect:/sys/${table.lowerName}WebController/list";
 	}
 }
