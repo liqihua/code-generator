@@ -1,4 +1,4 @@
-package com.liqihua.config;
+package com.generator.config.jdbc;
 
 import com.alibaba.druid.pool.DruidDataSource;
 import org.apache.ibatis.session.SqlSessionFactory;

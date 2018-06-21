@@ -1,4 +1,4 @@
-package com.liqihua.common.utils;
+package com.generator.common.utils;
 
 import org.apache.commons.lang3.StringUtils;
 
@@ -33,6 +33,19 @@ public class Tool {
     }
 
 
-
+    /**
+     * 判断str在不在strs里面，如果在，返回true
+     * @param str
+     * @param strs
+     * @return
+     */
+    public static boolean in(String str,String ... strs){
+        for(String s : strs){
+            if(s.equals(str)){
+                return true;
+            }
+        }
+        return false;
+    }
 
 }
