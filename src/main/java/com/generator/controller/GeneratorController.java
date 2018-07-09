@@ -37,11 +37,4 @@ public class GeneratorController extends BaseController{
         return buildSuccessInfo("--makeCode--");
     }
 
-    @ApiOperation(value = "test1")
-    @RequestMapping(value = "/test1",method = RequestMethod.GET)
-    public ResponseEntity<BaseResult> test1(){
-        return buildSuccessInfo(Tool.getWorkspace());
-    }
-
-
 }

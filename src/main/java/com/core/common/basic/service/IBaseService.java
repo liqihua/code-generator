@@ -1,0 +1,44 @@
+package com.core.common.basic.service;
+
+import com.core.common.page.SysPage;
+import com.core.common.utils.Tool;
+import org.springframework.transaction.annotation.Transactional;
+
+import javax.servlet.http.HttpServletRequest;
+import java.util.Date;
+import java.util.List;
+import java.util.Map;
+import java.util.UUID;
+
+/**
+ * @author liqihua
+ * @since 2018/7/9
+ */
+
+public interface IBaseService<T> {
+
+    public T get(String id);
+
+    public T getForUpdate(String id);
+
+    public T getBy(String column,String value);
+
+    public List<T> fromTable(String sql);
+
+    public List<Map<String,Object>> findListSQL(String sql);
+
+    public List<T> findList(T entity);
+
+    public int save(T entity);
+
+    public int exec(String sql);
+
+    public int delete(T entity);
+
+    public void delete(List<T> list);
+
+    public int getCount(T entity);
+
+    public SysPage<T> findPage(T entity, HttpServletRequest request);
+
+}

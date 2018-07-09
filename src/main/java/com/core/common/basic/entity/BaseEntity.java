@@ -9,7 +9,7 @@ public abstract class BaseEntity implements Serializable{
 	
 	private static final long serialVersionUID = 1L;
 	
-	private String id;
+	private Long id;
 	private Date updateDate;
 	private Date createDate;
 	private Integer first;
@@ -25,11 +25,11 @@ public abstract class BaseEntity implements Serializable{
 	 * 当前实体分页对象
 	 */
 
-	public String getId() {
+	public Long getId() {
 		return id;
 	}
 
-	public void setId(String id) {
+	public void setId(Long id) {
 		this.id = id;
 	}
 	

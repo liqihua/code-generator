@@ -5,6 +5,7 @@ import com.core.common.basic.entity.BaseEntity;
 import com.core.common.page.SysPage;
 import com.core.common.utils.Tool;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
 import javax.servlet.http.HttpServletRequest;
@@ -13,8 +14,12 @@ import java.util.List;
 import java.util.Map;
 import java.util.UUID;
 
-
-@Transactional(readOnly = true)
+/**
+ * cglib模式
+ * @param <D>
+ * @param <T>
+ */
+@Transactional(readOnly = true,propagation = Propagation.REQUIRED,rollbackFor = Exception.class)
 public abstract class BaseService<D extends BaseDao<T>, T extends BaseEntity> {
 	
 	@Autowired
@@ -43,12 +48,11 @@ public abstract class BaseService<D extends BaseDao<T>, T extends BaseEntity> {
 	public List<T> findList(T entity){
 		return dao.findList(entity);
 	}
-	
-	
-	@Transactional(readOnly = false)
+
+
+	@Transactional(readOnly = false,propagation = Propagation.REQUIRED,rollbackFor = Exception.class)
 	public int save(T entity){
-		if(Tool.isBlank(entity.getId())){
-			entity.setId(UUID.randomUUID().toString().replace("-", ""));
+		if(entity.getId() == null){
 			entity.setCreateDate(new Date());
 			entity.setUpdateDate(new Date());
 			return dao.insert(entity);
@@ -57,21 +61,21 @@ public abstract class BaseService<D extends BaseDao<T>, T extends BaseEntity> {
 			return dao.update(entity);
 		}
 	}
-	
-	
-	@Transactional(readOnly = false)
+
+
+	@Transactional(readOnly = false,propagation = Propagation.REQUIRED,rollbackFor = Exception.class)
 	public int exec(String sql){
 		return dao.exec(sql);
 	}
-	
-	
-	@Transactional(readOnly = false)
+
+
+	@Transactional(readOnly = false,propagation = Propagation.REQUIRED,rollbackFor = Exception.class)
 	public int delete(T entity){
 		return dao.delete(entity);
 	}
 	
 	
-	@Transactional(readOnly = false)
+	@Transactional(readOnly = false,propagation = Propagation.REQUIRED,rollbackFor = Exception.class)
 	public void delete(List<T> list){
 		if(list != null && list.size()>0){
 			for(T entity : list){

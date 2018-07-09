@@ -17,7 +17,7 @@ public class DTO${table.shortName} implements Serializable{
 	private static final long serialVersionUID = 1L;
 	
 	@ApiModelProperty("id")
-	public String id;
+	public Long id;
 	<#list table.columnList as col>
 	<#if col.columnName != "id" && col.columnName != "create_date" && col.columnName != "update_date">
 	@ApiModelProperty("${col.columnComment}")

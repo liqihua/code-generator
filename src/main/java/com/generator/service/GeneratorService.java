@@ -23,15 +23,17 @@ public class GeneratorService {
 	protected static final int TYPE_ENTITY = 2;
 	protected static final int TYPE_DAO = 3;
 	protected static final int TYPE_SERVICE = 4;
-	protected static final int TYPE_WEB_CONTROLLER = 5;
-	protected static final int TYPE_JSP_LIST = 6;
-	protected static final int TYPE_JSP_FORM = 7;
-	protected static final int TYPE_DTO = 8;
+	protected static final int TYPE_SERVICE_IMPL = 5;
+	protected static final int TYPE_WEB_CONTROLLER = 6;
+	protected static final int TYPE_JSP_LIST = 7;
+	protected static final int TYPE_JSP_FORM = 8;
+	protected static final int TYPE_DTO = 9;
 	
 	protected static final String TPL_MAPPER = "/mapper.ftl";
 	protected static final String TPL_ENTITY = "/entity.ftl";
 	protected static final String TPL_DAO = "/dao.ftl";
-	protected static final String TPL_SERVICE = "/service.ftl";
+	protected static final String TPL_SERVICE = "/service_interface.ftl";
+	protected static final String TPL_SERVICE_IMPL = "/service_impl.ftl";
 	protected static final String TPL_WEB_CONTROLLER = "/webController.ftl";
 	protected static final String TPL_JSP_LIST = "/jspList.ftl";
 	protected static final String TPL_JSP_FORM = "/jspForm.ftl";
@@ -41,6 +43,7 @@ public class GeneratorService {
 	protected static final String PATH_ENTITY ="\\entity";
 	protected static final String PATH_DAO ="\\dao";
 	protected static final String PATH_SERVICE ="\\service";
+	protected static final String PATH_SERVICE_IMPL ="\\service\\impl";
 	protected static final String PATH_WEB_CONTROLLER ="\\controller\\web";
 	protected static final String PATH_JSP = "\\src\\main\\webapp\\WEB-INF\\views\\project";
 	protected static final String PATH_DTO = "\\entity\\dto";
@@ -49,6 +52,7 @@ public class GeneratorService {
 	protected static final String SUFFIX_ENTITY = ".java";
 	protected static final String SUFFIX_DAO = "Dao.java";
 	protected static final String SUFFIX_SERVICE = "Service.java";
+	protected static final String SUFFIX_SERVICE_IMPL = "ServiceImpl.java";
 	protected static final String SUFFIX_WEB_CONTROLLER = "WebController.java";
 	protected static final String SUFFIX_JSP_LIST = "List.jsp";
 	protected static final String SUFFIX_JSP_FORM = "Form.jsp";
@@ -73,7 +77,8 @@ public class GeneratorService {
 		makeDao(tableName,packageName);
 		makeVO(tableName,packageName);
 		makeService(tableName,packageName);
-		makeWebController(tableName,packageName);
+		makeServiceImpl(tableName,packageName);
+		/*makeWebController(tableName,packageName);*/
 		//makeJspList(tableName);
 		//makeJspForm(tableName);
 	}
@@ -113,6 +118,14 @@ public class GeneratorService {
 	public void makeService(String tableName,String packageName){
 		generate(tableName, TYPE_SERVICE,packageName);
 	}
+
+	/*
+	 * 生成serviceImpl
+	 */
+	public void makeServiceImpl(String tableName,String packageName){
+		generate(tableName, TYPE_SERVICE_IMPL,packageName);
+	}
+
 	
 	/*
 	 * 生成controller
@@ -160,6 +173,11 @@ public class GeneratorService {
 				tplFile = TPL_SERVICE;
 				genPath = PATH_SERVICE;
 				suffix = SUFFIX_SERVICE;
+				break;
+			case TYPE_SERVICE_IMPL:
+				tplFile = TPL_SERVICE_IMPL;
+				genPath = PATH_SERVICE_IMPL;
+				suffix = SUFFIX_SERVICE_IMPL;
 				break;
 			case TYPE_WEB_CONTROLLER:
 				tplFile = TPL_WEB_CONTROLLER;
