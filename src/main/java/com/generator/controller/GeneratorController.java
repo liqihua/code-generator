@@ -28,11 +28,12 @@ public class GeneratorController extends BaseController{
     @ApiOperation(value = "makeCode")
     @RequestMapping(value = "/makeCode",method = RequestMethod.GET)
     public ResponseEntity<BaseResult> makeCode(@ApiParam(value = "tableName",required = true) @RequestParam(value="tableName",required=true) String tableName,
-                                               @ApiParam(value = "packageName",required = true) @RequestParam(value="packageName",required=true) String packageName){
+                                               @ApiParam(value = "packageName",required = true) @RequestParam(value="packageName",required=true) String packageName,
+                                               @ApiParam(value = "corePackage",required = false) @RequestParam(value="corePackage",required=false) String corePackage){
         if(packageName.contains("core") || packageName.contains("generator")){
-            return buildFailedInfo("包名不能含有core、generator");
+            return buildFailedInfo("packageName不能含有core、generator");
         }
-        generatorService.makeAll(tableName,packageName);
+        generatorService.makeAll(tableName,packageName,corePackage);
         return buildSuccessInfo("--makeCode--");
     }
 

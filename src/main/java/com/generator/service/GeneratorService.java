@@ -76,13 +76,13 @@ public class GeneratorService {
 	/*
 	 * 全部生成
 	 */
-	public void makeAll(String tableName,String packageName){
-		makeMapper(tableName,packageName);
-		makeEntity(tableName,packageName);
-		makeDao(tableName,packageName);
-		makeVO(tableName,packageName);
-		makeService(tableName,packageName);
-		makeServiceImpl(tableName,packageName);
+	public void makeAll(String tableName,String packageName,String corePackage){
+		makeMapper(tableName,packageName,corePackage);
+		makeEntity(tableName,packageName,corePackage);
+		makeDao(tableName,packageName,corePackage);
+		makeVO(tableName,packageName,corePackage);
+		makeService(tableName,packageName,corePackage);
+		makeServiceImpl(tableName,packageName,corePackage);
 		/*makeWebController(tableName,packageName);*/
 		//makeJspList(tableName);
 		//makeJspForm(tableName);
@@ -92,68 +92,68 @@ public class GeneratorService {
 	/*
 	 * 生成mapper
 	 */
-	public void makeMapper(String tableName,String packageName){
-		generate(tableName, TYPE_MAPPER,packageName);
+	public void makeMapper(String tableName,String packageName,String corePackage){
+		generate(tableName, TYPE_MAPPER,packageName,corePackage);
 	}
 	
 	/*
 	 * 生成实体类
 	 */
-	public void makeEntity(String tableName,String packageName){
-		generate(tableName, TYPE_ENTITY,packageName);
+	public void makeEntity(String tableName,String packageName,String corePackage){
+		generate(tableName, TYPE_ENTITY,packageName,corePackage);
 	}
 	
 	/*
 	 * 生成dao
 	 */
-	public void makeDao(String tableName,String packageName){
-		generate(tableName, TYPE_DAO,packageName);
+	public void makeDao(String tableName,String packageName,String corePackage){
+		generate(tableName, TYPE_DAO,packageName,corePackage);
 	}
 	
 	/*
 	 * 生成return
 	 */
-	public void makeVO(String tableName, String packageName){
-		generate(tableName, TYPE_DTO,packageName);
+	public void makeVO(String tableName, String packageName,String corePackage){
+		generate(tableName, TYPE_DTO,packageName,corePackage);
 	}
 	
 	/*
 	 * 生成service
 	 */
-	public void makeService(String tableName,String packageName){
-		generate(tableName, TYPE_SERVICE,packageName);
+	public void makeService(String tableName,String packageName,String corePackage){
+		generate(tableName, TYPE_SERVICE,packageName,corePackage);
 	}
 
 	/*
 	 * 生成serviceImpl
 	 */
-	public void makeServiceImpl(String tableName,String packageName){
-		generate(tableName, TYPE_SERVICE_IMPL,packageName);
+	public void makeServiceImpl(String tableName,String packageName,String corePackage){
+		generate(tableName, TYPE_SERVICE_IMPL,packageName,corePackage);
 	}
 
 	
 	/*
 	 * 生成controller
 	 */
-	public void makeWebController(String tableName,String packageName){
-		generate(tableName, TYPE_WEB_CONTROLLER,packageName);
+	public void makeWebController(String tableName,String packageName,String corePackage){
+		generate(tableName, TYPE_WEB_CONTROLLER,packageName,corePackage);
 	}
 	
 	/*
 	 * 生成list.jsp
 	 */
-	public void makeJspList(String tableName,String packageName){
-		generate(tableName, TYPE_JSP_LIST,packageName);
+	public void makeJspList(String tableName,String packageName,String corePackage){
+		generate(tableName, TYPE_JSP_LIST,packageName,corePackage);
 	}
 	
 	/*
 	 * 生成form.jsp
 	 */
-	public void makeJspForm(String tableName,String packageName){
-		generate(tableName, TYPE_JSP_FORM,packageName);
+	public void makeJspForm(String tableName,String packageName,String corePackage){
+		generate(tableName, TYPE_JSP_FORM,packageName,corePackage);
 	}
 	
-	public void generate(String tableName,int type,String packageName){
+	public void generate(String tableName,int type,String packageName,String corePackage){
 		String tplFile = null;
 		String suffix = null;
 		String genPath = null;
@@ -223,11 +223,14 @@ public class GeneratorService {
 			sysTable.setPermEdit(tableService.toPermStr(tableName, PERM_TYPE_EDIT));
 			sysTable.setPermDelete(tableService.toPermStr(tableName, PERM_TYPE_DELETE));
 			sysTable.setShortName(tableService.toShortName(tableName));
-			
+
+			if(Tool.isBlank(corePackage)){
+				corePackage = CORE_PACKAGE_PATH;
+			}
 			Map<String,Object> table = new HashMap<String, Object>();
 			table.put("table", sysTable);
 			table.put("packageName", packageName);
-			table.put("corePackagePath", CORE_PACKAGE_PATH);
+			table.put("corePackagePath", corePackage);
 			Configuration cfg = new Configuration();
 	        String path = this.getClass().getResource("/").getPath()+"templates";
 	        String fileName = sysTable.getClassName()+suffix;
