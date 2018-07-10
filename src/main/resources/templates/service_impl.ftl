@@ -8,7 +8,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.core.common.basic.service.impl.BaseServiceImpl;
+import ${corePackagePath}.basic.service.impl.BaseServiceImpl;
 
 import ${packageName}.entity.dto.DTO${table.shortName};
 import ${packageName}.entity.${table.className};

@@ -13,9 +13,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-import com.core.common.basic.controller.BaseController;
-import com.core.common.page.SysPage;
-import com.core.common.utils.Tool;
+import ${corePackagePath}.basic.controller.BaseController;
+import ${corePackagePath}.page.SysPage;
+import ${corePackagePath}.utils.Tool;
 import ${packageName}.entity.${table.className};
 import ${packageName}.service.${table.className}Service;
 

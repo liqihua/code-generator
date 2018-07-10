@@ -1,4 +1,4 @@
-package com.core.common.basic.result;
+package com.core.basic.result;
 
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;

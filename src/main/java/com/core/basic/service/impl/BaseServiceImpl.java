@@ -1,10 +1,10 @@
-package com.core.common.basic.service.impl;
+package com.core.basic.service.impl;
 
-import com.core.common.basic.dao.BaseDao;
-import com.core.common.basic.entity.BaseEntity;
-import com.core.common.basic.service.IBaseService;
-import com.core.common.page.SysPage;
-import com.core.common.utils.Tool;
+import com.core.basic.dao.BaseDao;
+import com.core.basic.entity.BaseEntity;
+import com.core.basic.service.IBaseService;
+import com.core.page.SysPage;
+import com.core.utils.Tool;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;

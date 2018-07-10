@@ -1,4 +1,4 @@
-package com.core.common.utils;
+package com.core.utils;
 
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.util.ClassUtils;

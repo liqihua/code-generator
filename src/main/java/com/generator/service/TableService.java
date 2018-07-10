@@ -1,8 +1,8 @@
 package com.generator.service;
 
+import com.core.utils.Tool;
 import com.generator.common.basic.TableColumn;
 import com.generator.dao.TableDao;
-import com.core.common.utils.Tool;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

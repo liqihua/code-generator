@@ -1,4 +1,4 @@
-package com.core.common.constance;
+package com.core.constance;
 
 
 import java.util.Map;

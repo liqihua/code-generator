@@ -10,7 +10,7 @@ import org.springframework.transaction.annotation.Propagation;
 
 import ${packageName}.entity.${table.className};
 import ${packageName}.dao.${table.className}Dao;
-import com.core.common.basic.service.BaseService;
+import ${corePackagePath}.basic.service.BaseService;
 import ${packageName}.entity.dto.DTO${table.shortName};
 
 @Service

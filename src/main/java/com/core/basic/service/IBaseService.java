@@ -1,14 +1,10 @@
-package com.core.common.basic.service;
+package com.core.basic.service;
 
-import com.core.common.page.SysPage;
-import com.core.common.utils.Tool;
-import org.springframework.transaction.annotation.Transactional;
+import com.core.page.SysPage;
 
 import javax.servlet.http.HttpServletRequest;
-import java.util.Date;
 import java.util.List;
 import java.util.Map;
-import java.util.UUID;
 
 /**
  * @author liqihua
@@ -21,7 +17,7 @@ public interface IBaseService<T> {
 
     public T getForUpdate(String id);
 
-    public T getBy(String column,String value);
+    public T getBy(String column, String value);
 
     public List<T> fromTable(String sql);
 

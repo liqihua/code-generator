@@ -1,4 +1,4 @@
-package com.core.common.basic.entity;
+package com.core.basic.entity;
 
 import org.springframework.format.annotation.DateTimeFormat;
 

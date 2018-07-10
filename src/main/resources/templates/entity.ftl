@@ -2,7 +2,7 @@ package ${packageName}.entity;
 
 import org.springframework.format.annotation.DateTimeFormat;
 
-import com.core.common.basic.entity.BaseEntity;
+import ${corePackagePath}.basic.entity.BaseEntity;
 import java.util.Date;
 <#list table.columnList as col>
 <#if col.javaType == "BigDecimal">

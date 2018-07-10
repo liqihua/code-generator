@@ -1,4 +1,4 @@
-package com.core.common.basic.dao;
+package com.core.basic.dao;
 
 import org.apache.ibatis.annotations.Param;
 

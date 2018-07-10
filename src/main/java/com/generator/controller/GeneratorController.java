@@ -1,9 +1,8 @@
 package com.generator.controller;
 
-import com.core.common.basic.controller.BaseController;
-import com.core.common.basic.result.BaseResult;
+import com.core.basic.controller.BaseController;
+import com.core.basic.result.BaseResult;
 import com.generator.service.GeneratorService;
-import com.core.common.utils.Tool;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiParam;

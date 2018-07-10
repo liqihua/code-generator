@@ -1,7 +1,7 @@
-package com.core.common.basic.controller;
+package com.core.basic.controller;
 
-import com.core.common.basic.result.BaseResult;
-import com.core.common.constance.ApiConstance;
+import com.core.basic.result.BaseResult;
+import com.core.constance.ApiConstance;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 

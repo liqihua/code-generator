@@ -1,8 +1,8 @@
 package com.generator.service;
 
+import com.core.utils.Tool;
 import com.generator.common.basic.Table;
 import com.generator.common.basic.TableColumn;
-import com.core.common.utils.Tool;
 import freemarker.template.Configuration;
 import freemarker.template.Template;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,6 +19,11 @@ import java.util.Map;
 
 @Service
 public class GeneratorService {
+	/**
+	 * 核心包的包名（路径）
+	 */
+	private String CORE_PACKAGE_PATH = "com.core";
+
 	protected static final int TYPE_MAPPER = 1;
 	protected static final int TYPE_ENTITY = 2;
 	protected static final int TYPE_DAO = 3;
@@ -222,6 +227,7 @@ public class GeneratorService {
 			Map<String,Object> table = new HashMap<String, Object>();
 			table.put("table", sysTable);
 			table.put("packageName", packageName);
+			table.put("corePackagePath", CORE_PACKAGE_PATH);
 			Configuration cfg = new Configuration();
 	        String path = this.getClass().getResource("/").getPath()+"templates";
 	        String fileName = sysTable.getClassName()+suffix;

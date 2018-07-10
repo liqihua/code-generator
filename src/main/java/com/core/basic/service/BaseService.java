@@ -1,9 +1,9 @@
-package com.core.common.basic.service;
+package com.core.basic.service;
 
-import com.core.common.basic.dao.BaseDao;
-import com.core.common.basic.entity.BaseEntity;
-import com.core.common.page.SysPage;
-import com.core.common.utils.Tool;
+import com.core.basic.dao.BaseDao;
+import com.core.basic.entity.BaseEntity;
+import com.core.page.SysPage;
+import com.core.utils.Tool;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
@@ -12,7 +12,6 @@ import javax.servlet.http.HttpServletRequest;
 import java.util.Date;
 import java.util.List;
 import java.util.Map;
-import java.util.UUID;
 
 /**
  * cglib模式
@@ -113,7 +112,7 @@ public abstract class BaseService<D extends BaseDao<T>, T extends BaseEntity> {
 		}
 		
 		if(entity.getMax() != null && count>0){
-			sysPage.setPageTotal(Tool.ceil(count, entity.getMax())); 
+			sysPage.setPageTotal(Tool.ceil(count, entity.getMax()));
 		}
 		if(sysPage.getPage() > 0){
 			sysPage.setPrevPage(sysPage.getPage()-1);
