@@ -37,4 +37,5 @@ public interface IBaseService<T> {
 
     public SysPage<T> findPage(T entity, HttpServletRequest request);
 
+
 }

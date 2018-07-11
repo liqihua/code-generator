@@ -22,7 +22,7 @@ import ${packageName}.service.${table.className}Service;
 @Transactional(readOnly = true,propagation = Propagation.REQUIRED,rollbackFor = Exception.class)
 public class ${table.className}ServiceImpl extends BaseServiceImpl<${table.className}Dao,${table.className}> implements ${table.className}Service {
 
-	public DTO${table.shortName} getReturn${table.shortName}(${table.className} entity){
+	public DTO${table.shortName} getDTO${table.shortName}(${table.className} entity){
 		DTO${table.shortName} ${table.shortName?lower_case} = new DTO${table.shortName}();
 		if(entity != null){
 			try{
@@ -35,7 +35,7 @@ public class ${table.className}ServiceImpl extends BaseServiceImpl<${table.class
 	}
 
 
-	public List<DTO${table.shortName}> getReturn${table.shortName}List(List<${table.className}> entityList){
+	public List<DTO${table.shortName}> getDTOList${table.shortName}List(List<${table.className}> entityList){
     	List<DTO${table.shortName}> list = new ArrayList<DTO${table.shortName}>();
         if(entityList != null && entityList.size()>0){
         	for(${table.className} entity : entityList){
