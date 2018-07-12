@@ -24,7 +24,7 @@ public abstract class BaseService<D extends BaseDao<T>, T extends BaseEntity> {
 	@Autowired
 	protected D dao;
 	
-	public T get(String id){
+	public T get(Long id){
 		return dao.get(id);
 	}
 

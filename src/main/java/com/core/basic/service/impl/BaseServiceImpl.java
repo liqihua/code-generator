@@ -25,7 +25,7 @@ public class BaseServiceImpl<D extends BaseDao<T>,T extends BaseEntity> implemen
     protected D dao;
 
     @Override
-    public T get(String id) {
+    public T get(Long id) {
         return dao.get(id);
     }
 

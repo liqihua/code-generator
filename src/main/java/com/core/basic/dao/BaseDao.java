@@ -8,7 +8,7 @@ import java.util.Map;
 
 public interface BaseDao<T> {
 	
-	public T get(String id);
+	public T get(Long id);
 
 	public T getForUpdate(String id);
 
