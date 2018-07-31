@@ -19,6 +19,20 @@ public class TableService {
 
 
     /**
+     * 判断表是否存在
+     * @param tableName
+     * @return
+     */
+    public boolean tableExist(String tableName){
+        int count = tableDao.findTable(tableName);
+        if(count > 0){
+            return true;
+        }
+        return false;
+    }
+
+
+    /**
      * 查询当前数据库所有表的名称
      * @author liqihua
      * @since 2018/6/21

@@ -14,6 +14,10 @@ import java.util.List;
 @Mapper
 public interface TableDao {
 
+    @Select("SELECT count(1) FROM information_schema.`TABLES` WHERE TABLE_SCHEMA=(SELECT DATABASE()) AND TABLE_NAME=#{tableName} ")
+    public int findTable(@Param("tableName") String tableName);
+
+
     @Select("SELECT TABLE_NAME FROM information_schema.`TABLES` WHERE TABLE_SCHEMA=(SELECT DATABASE()) ")
     public List<String> findTableList();
 

@@ -3,6 +3,7 @@ package com.generator.controller;
 import com.core.basic.controller.BaseController;
 import com.core.basic.result.BaseResult;
 import com.generator.service.GeneratorService;
+import com.generator.service.TableService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiParam;
@@ -23,6 +24,8 @@ import org.springframework.web.bind.annotation.RestController;
 public class GeneratorController extends BaseController{
     @Autowired
     private GeneratorService generatorService;
+    @Autowired
+    private TableService tableService;
 
 
     @ApiOperation(value = "makeCode")
@@ -32,6 +35,9 @@ public class GeneratorController extends BaseController{
                                                @ApiParam(value = "父类包名，如：com.liqihua.core",required = false) @RequestParam(value="corePackage",required=false) String corePackage){
         if(packageName.contains("core") || packageName.contains("generator")){
             return buildFailedInfo("packageName不能含有core、generator");
+        }
+        if(!tableService.tableExist(tableName)){
+            return buildFailedInfo("表："+tableName+" 不存在");
         }
         generatorService.makeAll(tableName,packageName,corePackage);
         return buildSuccessInfo("--makeCode--");

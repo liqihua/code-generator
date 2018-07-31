@@ -3,6 +3,7 @@ package com.generator.controller;
 import com.core.basic.controller.BaseController;
 import com.core.basic.result.BaseResult;
 import com.core.constance.ApiConstance;
+import com.generator.service.TableService;
 import io.swagger.annotations.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -19,16 +20,16 @@ import org.springframework.web.bind.annotation.RequestParam;
 @SpringBootApplication
 @RequestMapping("/api/testApiController")
 public class TestApiController extends BaseController{
-    /*@Autowired
-    private TestStudentService studentService;
+    @Autowired
+    private TableService tableService;
 
 
     @ApiOperation(value = "描述aa")
     @RequestMapping(value = "/test1", method = RequestMethod.GET)
     @ApiResponses({@ApiResponse(code = ApiConstance.BASE_SUCCESS_CODE, message = "成功", response = String.class)})
     public ResponseEntity<BaseResult> test1(@ApiParam(value = "aa",required = true) @RequestParam(value="aa",required=false) String aa){
-        return buildSuccessInfo(studentService.findList(null));
-    }*/
+        return buildSuccessInfo(tableService.tableExist(aa));
+    }
 
 
 }
