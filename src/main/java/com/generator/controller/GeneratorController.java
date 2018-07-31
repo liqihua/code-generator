@@ -27,9 +27,9 @@ public class GeneratorController extends BaseController{
 
     @ApiOperation(value = "makeCode")
     @RequestMapping(value = "/makeCode",method = RequestMethod.GET)
-    public ResponseEntity<BaseResult> makeCode(@ApiParam(value = "tableName",required = true) @RequestParam(value="tableName",required=true) String tableName,
-                                               @ApiParam(value = "packageName",required = true) @RequestParam(value="packageName",required=true) String packageName,
-                                               @ApiParam(value = "corePackage",required = false) @RequestParam(value="corePackage",required=false) String corePackage){
+    public ResponseEntity<BaseResult> makeCode(@ApiParam(value = "表名",required = true) @RequestParam(value="tableName",required=true) String tableName,
+                                               @ApiParam(value = "包名，如：com.liqihua.tally",required = true) @RequestParam(value="packageName",required=true) String packageName,
+                                               @ApiParam(value = "父类包名，如：com.liqihua.core",required = false) @RequestParam(value="corePackage",required=false) String corePackage){
         if(packageName.contains("core") || packageName.contains("generator")){
             return buildFailedInfo("packageName不能含有core、generator");
         }
